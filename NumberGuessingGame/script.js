@@ -10,7 +10,8 @@ const displayGameOutcome = document.getElementById("displayGameOutcome");
 
 let attempts = 10;
 let gameRunning = true;
-displayAttempts.textContent = `Attempts left: ${attempts}`;
+adjustDisplayAttempts();
+console.log(luckyNumber);
 
 
 checkBtn.onclick = function () {
@@ -20,15 +21,15 @@ checkBtn.onclick = function () {
         displayGameOutcome.textContent = `Invalid charater. Pleaes refresh and start again!`;
     } else {
         if (Number(userGuess.value) === luckyNumber) {
-            attempts--;
-            displayAttempts.textContent = `Attempts left: ${attempts}`;
+            attempts = 0;
+            adjustDisplayAttempts();
             displayNumber.textContent = `The magic number is:\t ${luckyNumber}`;
             displayGameOutcome.textContent = "You win. Congratulations!";
 
 
         } else {
             attempts--;
-            displayAttempts.textContent = `Attempts left: ${attempts}`;
+            adjustDisplayAttempts();
             if (attempts === 0) {
                 checkBtn.disabled = true;
                 displayGameOutcome.textContent = "You lose!!";
@@ -38,5 +39,8 @@ checkBtn.onclick = function () {
 
 }
 
+function adjustDisplayAttempts() {
+    displayAttempts.textContent = `Attempts left:\t${attempts}`;
+}
 
 
